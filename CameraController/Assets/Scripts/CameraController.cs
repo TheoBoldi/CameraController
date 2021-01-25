@@ -5,27 +5,41 @@ using UnityEngine;
 public class CameraController : MonoBehaviour
 {
     public bool useCameraConfiguration1 = true;
-    public float lerpDuration = 1;
+    public float lerpDuration = 5;
     public CameraConfiguration cameraConfiguration1;
     public CameraConfiguration cameraConfiguration2;
 
     private bool isMoving = false;
+    private bool lastConfiguration;
+
+    private void Awake()
+    {
+        lastConfiguration = useCameraConfiguration1;
+    }
 
     void Update()
     {
         if (!isMoving)
         {
-            if (useCameraConfiguration1)
-                cameraConfiguration1.UpdateConfig(gameObject);
+            if (useCameraConfiguration1 == lastConfiguration)
+            {
+                if (useCameraConfiguration1)
+                    cameraConfiguration1.UpdateConfig(gameObject);
+                else
+                    cameraConfiguration2.UpdateConfig(gameObject);
+            }
             else
-                cameraConfiguration2.UpdateConfig(gameObject);
+            {
+                lastConfiguration = useCameraConfiguration1;
+                isMoving = true;
+            }
         }
         else
         {
             if (useCameraConfiguration1)
-                isMoving = cameraConfiguration1.LerpConfig(gameObject, lerpDuration);
+                isMoving = cameraConfiguration1.LerpConfig(gameObject, cameraConfiguration2, lerpDuration);
             else
-                isMoving = cameraConfiguration2.LerpConfig(gameObject, lerpDuration);
+                isMoving = cameraConfiguration2.LerpConfig(gameObject, cameraConfiguration1, lerpDuration);
         }
     }
 }
@@ -56,25 +70,30 @@ public class CameraConfiguration
         test.fieldOfView = fov;
     }
 
-    public bool LerpConfig(GameObject camera, float lerpDuration)
+    public bool LerpConfig(GameObject camera, CameraConfiguration actualConfiguration, float lerpDuration)
     {
         Camera test = camera.GetComponent<Camera>();
 
-        lerpTest += Time.deltaTime;
+        if (lerpTest < lerpDuration)
+        {
+            float newPitch = Mathf.Lerp(actualConfiguration.pitch, pitch, lerpTest / lerpDuration);
+            float newYaw = Mathf.Lerp(actualConfiguration.yaw, yaw, lerpTest / lerpDuration);
+            float newRoll = Mathf.Lerp(actualConfiguration.roll, roll, lerpTest / lerpDuration);
+            Vector3 newPivot = Vector3.Lerp(actualConfiguration.pivot, pivot, lerpTest);
+            float newDistance = Mathf.Lerp(actualConfiguration.distance, distance, lerpTest);
+            float newFov = Mathf.Lerp(actualConfiguration.fov, fov, lerpTest / lerpDuration);
 
-        float newPitch = Mathf.Lerp(camera.transform.rotation.x, pitch, lerpTest);
-        float newYaw = Mathf.Lerp(camera.transform.rotation.y, yaw, lerpTest);
-        float newRoll = Mathf.Lerp(camera.transform.rotation.z, roll, lerpTest);
-        //Vector3 newPivot = Vector3.Lerp(camera.transform.position - camera.transform.rotation * Vector3.back * distance, pivot, lerpTest);
-        //float newDistance = Mathf.Lerp();
-        float newFov = Mathf.Lerp(test.fieldOfView, fov, lerpTest);
+            camera.transform.rotation = Quaternion.Euler(newPitch, newYaw, newRoll);
+            camera.transform.position = newPivot + camera.transform.rotation * Vector3.back * newDistance;
+            test.fieldOfView = newFov;
 
-        camera.transform.rotation = Quaternion.Euler(newPitch, newYaw, newRoll);
-        //camera.transform.position = newPivot + camera.transform.rotation * Vector3.back * distance;
-        test.fieldOfView = newFov;
-
-        if (lerpTest >= lerpDuration)
+            lerpTest += Time.deltaTime;
+            return true;
+        }
+        else
+        {
+            lerpTest = 0;
             return false;
-        return true;
+        }
     }
 }

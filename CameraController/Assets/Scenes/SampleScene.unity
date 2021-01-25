@@ -407,8 +407,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f118d10d0370d74bac3e9ad57564a54, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  useCameraConfiguration1: 0
-  lerpDuration: 1
+  useCameraConfiguration1: 1
+  lerpDuration: 5
   cameraConfiguration1:
     yaw: 180
     pitch: 0
