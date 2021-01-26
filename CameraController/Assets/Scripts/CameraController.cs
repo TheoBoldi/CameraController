@@ -4,17 +4,45 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
+    private static CameraController instance = null;
+
+    public static CameraController Instance
+    {
+        get
+        {
+            return instance;
+        }
+    }
+
     public bool useCameraConfiguration1 = true;
     public float lerpDuration = 5;
     public CameraConfiguration cameraConfiguration1;
     public CameraConfiguration cameraConfiguration2;
+
+    private List<AView> activeViews;
 
     private bool isMoving = false;
     private bool lastConfiguration;
 
     private void Awake()
     {
+        if (instance != null && instance != this)
+        {
+            Destroy(this.gameObject);
+        }
+
+        instance = this;
+        DontDestroyOnLoad(this.gameObject);
+
         lastConfiguration = useCameraConfiguration1;
+    }
+
+    void OnDrawGizmos()
+    {
+        if(useCameraConfiguration1)
+            cameraConfiguration1.DrawGizmos(Color.green);
+        else 
+            cameraConfiguration2.DrawGizmos(Color.green);
     }
 
     void Update()
@@ -41,6 +69,16 @@ public class CameraController : MonoBehaviour
             else
                 isMoving = cameraConfiguration2.LerpConfig(gameObject, cameraConfiguration1, lerpDuration);
         }
+    }
+
+    void AddView(AView view)
+    {
+        activeViews.Add(view);
+    }
+
+    void RemoveView(AView view)
+    {
+        activeViews.Remove(view);
     }
 }
 
@@ -96,5 +134,26 @@ public class CameraConfiguration
             timeElapsed = 0;
             return false;
         }
+    }
+
+    public Quaternion GetRotation()
+    {
+        return Quaternion.Euler(pitch, yaw, roll);
+    }
+
+    public Vector3 GetPosition()
+    {
+        return pivot + GetRotation() * Vector3.back * distance;
+    }
+
+    public void DrawGizmos(Color color)
+    {
+        Gizmos.color = color;
+        Gizmos.DrawSphere(pivot, 0.25f);
+        Vector3 position = GetPosition();
+        Gizmos.DrawLine(pivot, position);
+        Gizmos.matrix = Matrix4x4.TRS(position, GetRotation(), Vector3.one);
+        Gizmos.DrawFrustum(Vector3.zero, fov, 0.5f, 0f, Camera.main.aspect);
+        Gizmos.matrix = Matrix4x4.identity;
     }
 }
