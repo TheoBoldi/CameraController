@@ -5,6 +5,7 @@ using UnityEngine;
 
 public abstract class AView : MonoBehaviour
 {
+    [Range(0, 100)]
     public float weight;
     public bool isActiveOnStart;
 
@@ -16,35 +17,18 @@ public abstract class AView : MonoBehaviour
         }
     }
 
-    public  virtual CameraConfiguration GetConfiguration()
-    {
-        return null;
-    }
+    public abstract CameraConfiguration GetConfiguration();
 
     void SetActive(bool isActive)
     {
-
+        if (isActive)
+            CameraController.Instance.AddView(this);
+        else
+            CameraController.Instance.RemoveView(this);
     }
-}
 
-public class FixedView : AView
-{
-    public float yaw;
-    public float pitch;
-    public float roll;
-    public float fov;
-
-    public override CameraConfiguration GetConfiguration()
+    private void OnDrawGizmos()
     {
-        CameraConfiguration cameraConfiguration = new CameraConfiguration
-        {
-            yaw = yaw,
-            pitch = pitch,
-            roll = roll,
-            fov = fov,
-            pivot = transform.position,
-            distance = 0
-        };
-        return cameraConfiguration;
+        GetConfiguration().DrawGizmos(Color.green);
     }
 }
