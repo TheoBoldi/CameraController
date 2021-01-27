@@ -250,7 +250,7 @@ MonoBehaviour:
   weight: 1
   isActiveOnStart: 0
   yaw: -144
-  pitch: -0
+  pitch: 0
   roll: 0
   fov: 60
 --- !u!4 &432440645
@@ -387,6 +387,7 @@ MonoBehaviour:
   pitchOffsetMax: 45
   fov: 60
   target: {fileID: 684722192}
+  centralPoint: {fileID: 853834296}
 --- !u!4 &595601715
 Transform:
   m_ObjectHideFlags: 0
@@ -678,7 +679,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 853834296}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 3.685371, y: 1.3676157, z: -0.49141628}
+  m_LocalPosition: {x: 3.685371, y: 1.3676157, z: -2.72}
   m_LocalScale: {x: 1, y: 2.8801, z: 1}
   m_Children: []
   m_Father: {fileID: 499269457}
@@ -835,6 +836,7 @@ MonoBehaviour:
   pitchOffsetMax: 45
   fov: 60
   target: {fileID: 168409868}
+  centralPoint: {fileID: 853834296}
 --- !u!4 &1114984752
 Transform:
   m_ObjectHideFlags: 0

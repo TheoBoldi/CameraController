@@ -21,11 +21,40 @@ public class FixedFollowView : AView
     private void Update()
     {
         Vector3 dir = (target.transform.position - transform.position).normalized;
+        Vector3 dirCentralPoint = (centralPoint.transform.position - transform.position).normalized;
 
-        //Vector3.Angle(target.transform.position - transform.position, centralPoint.transform.position - transform.position);
+        float newYaw = Mathf.Atan2(dir.x, dir.z) * Mathf.Rad2Deg;
+        float newPitch = -Mathf.Asin(dir.y) * Mathf.Rad2Deg;
 
-        yaw = Mathf.Atan2(dir.x, dir.z) * Mathf.Rad2Deg;
-        pitch = -Mathf.Asin(dir.y) * Mathf.Rad2Deg;
+        float yawCentralPoint = Mathf.Atan2(dirCentralPoint.x, dirCentralPoint.z) * Mathf.Rad2Deg;
+        float pitchCentralPoint = -Mathf.Asin(dirCentralPoint.y) * Mathf.Rad2Deg;
+
+        float yawDiff = (newYaw - yawCentralPoint);
+        float pitchDiff = (newPitch - pitchCentralPoint);
+
+        if (yawDiff > 180)
+            yawDiff -= 360;
+        if (yawDiff < -180)
+            yawDiff += 360;
+
+        if (pitchDiff > 180)
+            pitchDiff -= 360;
+        if (pitchDiff < -180)
+            pitchDiff += 360;
+
+        if (Mathf.Abs(yawDiff) < yawOffsetMax)
+            yaw = newYaw;
+        else if (yawDiff <= -yawOffsetMax)
+            yaw = yawCentralPoint - yawOffsetMax;
+        else if (yawDiff >= yawOffsetMax)
+            yaw = yawCentralPoint + yawOffsetMax;
+
+        if (Mathf.Abs(pitchDiff) < pitchOffsetMax)
+            pitch = newPitch;
+        else if (pitchDiff <= - pitchOffsetMax)
+            pitch = pitchCentralPoint - pitchOffsetMax;
+        else if (pitchDiff >= pitchOffsetMax)
+            pitch = pitchCentralPoint + pitchOffsetMax;
     }
 
     public override CameraConfiguration GetConfiguration()
