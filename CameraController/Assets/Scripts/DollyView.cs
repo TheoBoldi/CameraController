@@ -32,27 +32,88 @@ public class DollyView : AView
         if (isAuto)
         {
             float min = float.MaxValue;
-            int nearestPoint = 0;
+            int nearestPointId = 0;
 
             for (int i = 0; i < rail.pointList.Count; i++)
             {
-                float tmpDistance = Vector3.Distance(target.transform.position, rail.pointList[i]);
+                float tmpDistance = Vector3.Distance(target.transform.position, rail.pointList[i].position);
                 if (tmpDistance < min)
                 {
                     min = tmpDistance;
-                    nearestPoint = i;
+                    nearestPointId = i;
                 }
             }
 
-            transform.position = rail.pointList[nearestPoint];
+            Vector3 nearestPoint = rail.pointList[nearestPointId].position; // B
+            Vector3 targetPos = target.transform.position; // T
+            Vector3 BT = targetPos - nearestPoint;
+
+            float leftNormalizedDistance = 0;
+            float rightNormalizedDistance = 0;
+            float mag_targetPos_leftResult = 0;
+            float mag_targetPos_rightResult = 0;
+            Vector3 leftResult = new Vector3();
+            Vector3 rightResult = new Vector3();
+
+            if (nearestPointId > 0)
+            {
+                Vector3 leftPoint = rail.pointList[nearestPointId - 1].position; // A
+                Vector3 BA = leftPoint - nearestPoint;
+
+                float BAmagnitude = Vector3.SqrMagnitude(BA);
+                float BTDotBA = Vector3.Dot(BT, BA);
+
+                leftNormalizedDistance = BTDotBA / BAmagnitude;
+
+                leftResult = nearestPoint + leftNormalizedDistance * BA;
+                mag_targetPos_leftResult = Vector3.Magnitude(targetPos - leftResult);
+            }
+
+            if (nearestPointId < rail.pointList.Count - 1)
+            {
+                Vector3 rightPoint = rail.pointList[nearestPointId + 1].position; // C
+                Vector3 BC = rightPoint - nearestPoint;
+
+                float BCmagnitude = Vector3.SqrMagnitude(BC);
+                float BTDotBC = Vector3.Dot(BT, BC);
+
+                rightNormalizedDistance = BTDotBC / BCmagnitude;
+
+                rightResult = nearestPoint + rightNormalizedDistance * BC;
+                mag_targetPos_rightResult = Vector3.Magnitude(targetPos - rightResult);
+            }
+
+            if (leftNormalizedDistance <= 0 && rightNormalizedDistance <= 0)
+                railPosition = rail.GetLength(nearestPointId);
+            else if (leftNormalizedDistance <= 0)
+                railPosition = rail.GetLength(nearestPointId) + Vector3.Magnitude(nearestPoint - rightResult);
+            else if (rightNormalizedDistance <= 0)
+                railPosition = rail.GetLength(nearestPointId) - Vector3.Magnitude(nearestPoint - leftResult);
+            else
+            {
+                if (mag_targetPos_leftResult <= mag_targetPos_rightResult)
+                    railPosition = rail.GetLength(nearestPointId) - Vector3.Magnitude(nearestPoint - leftResult);
+                else
+                    railPosition = rail.GetLength(nearestPointId) + Vector3.Magnitude(nearestPoint - rightResult);
+            }
+
+            //transform.position = rail.pointList[nearestPoint];
         }
         else
         {
             float move = Input.GetAxis("Horizontal");
             railPosition += move * speed * Time.deltaTime;
-            transform.position = rail.GetPosition(railPosition);
+
+            while (railPosition < 0 || railPosition > rail.GetLength())
+            {
+                if (railPosition < 0)
+                    railPosition += rail.GetLength();
+                else if (railPosition > rail.GetLength())
+                    railPosition -= rail.GetLength();
+            }
         }
 
+        transform.position = rail.GetPosition(railPosition);
     }
 
     public override CameraConfiguration GetConfiguration()

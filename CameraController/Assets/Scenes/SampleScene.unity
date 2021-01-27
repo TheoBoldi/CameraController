@@ -1105,7 +1105,7 @@ MonoBehaviour:
   target: {fileID: 853834296}
   rail: {fileID: 377159506}
   railPosition: 3
-  speed: 1
+  speed: 2
 --- !u!4 &1951602850
 Transform:
   m_ObjectHideFlags: 0

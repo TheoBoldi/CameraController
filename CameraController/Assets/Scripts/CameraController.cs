@@ -69,6 +69,16 @@ public class CameraController : MonoBehaviour
 
         if (transitionSpeed * Time.deltaTime < 1)
         {
+            float yawDiff = targetConfig.yaw - currentConfig.yaw;
+            
+            if (Mathf.Abs(yawDiff) > 180)
+            {
+                if (currentConfig.yaw > 0)
+                    currentConfig.yaw -= 360;
+                else
+                    currentConfig.yaw += 360;
+            }
+
             currentConfig.yaw = currentConfig.yaw + (targetConfig.yaw - currentConfig.yaw) * transitionSpeed * Time.deltaTime;
             currentConfig.pitch = currentConfig.pitch + (targetConfig.pitch - currentConfig.pitch) * transitionSpeed * Time.deltaTime;
             currentConfig.roll = currentConfig.roll + (targetConfig.roll - currentConfig.roll) * transitionSpeed * Time.deltaTime;
