@@ -6,7 +6,7 @@ using UnityEngine;
 public abstract class AView : MonoBehaviour
 {
     [Range(0, 100)]
-    public float weight;
+    public float weight = 1;
     public bool isActiveOnStart;
 
     private void Start()
