@@ -212,7 +212,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 168409868}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 3.445371, y: 1.3676157, z: -6.6714163}
+  m_LocalPosition: {x: 3.445371, y: 1.73, z: -6.63}
   m_LocalScale: {x: 1, y: 2.8801, z: 1}
   m_Children: []
   m_Father: {fileID: 499269457}
@@ -248,7 +248,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isLoop: 1
-  pointList: []
+  pointList:
+  - {fileID: 461238504}
+  - {fileID: 397463812}
+  - {fileID: 1633194786}
 --- !u!4 &377159507
 Transform:
   m_ObjectHideFlags: 0
@@ -257,7 +260,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 377159505}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalPosition: {x: 4, y: 1, z: 1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 461238504}
@@ -290,7 +293,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 397463811}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.02, y: 0, z: 5.03}
+  m_LocalPosition: {x: 1, y: 0, z: 5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 377159507}
@@ -327,7 +330,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weight: 1
   isActiveOnStart: 0
-  yaw: -144
+  yaw: -149
   pitch: 0
   roll: 0
   fov: 60
@@ -339,7 +342,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 432440643}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.63, y: 1.57, z: 2.596}
+  m_LocalPosition: {x: 0.41, y: 1.57, z: 5.28}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -369,7 +372,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 461238503}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.02, y: 0, z: 0}
+  m_LocalPosition: {x: 1, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 377159507}
@@ -406,7 +409,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weight: 1
   isActiveOnStart: 0
-  yaw: -84
+  yaw: -109
   pitch: 0
   roll: 0
   fov: 60
@@ -418,7 +421,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 485012770}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.124, y: 1.52, z: 4.07}
+  m_LocalPosition: {x: -1.34, y: 1.52, z: 7.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -599,7 +602,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 684722192}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.06462908, y: 1.3676157, z: -0.42141628}
+  m_LocalPosition: {x: -0.13, y: 1.87, z: -0.82}
   m_LocalScale: {x: 1, y: 2.8801, z: 1}
   m_Children: []
   m_Father: {fileID: 499269457}
@@ -787,7 +790,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 853834296}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 3.685371, y: 1.3676157, z: -2.72}
+  m_LocalPosition: {x: 3.4, y: 1.3676157, z: -3.17}
   m_LocalScale: {x: 1, y: 2.8801, z: 1}
   m_Children: []
   m_Father: {fileID: 499269457}
@@ -1061,7 +1064,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1633194785}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 9.97, y: 0, z: 5.03}
+  m_LocalPosition: {x: 5, y: 0, z: 5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 377159507}
@@ -1104,7 +1107,7 @@ MonoBehaviour:
   fov: 60
   target: {fileID: 853834296}
   rail: {fileID: 377159506}
-  railPosition: 3
+  railPosition: 0
   speed: 2
 --- !u!4 &1951602850
 Transform:
@@ -1114,7 +1117,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1951602848}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 10.17, y: 0, z: -6.29}
+  m_LocalPosition: {x: 5, y: 1, z: 1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1246,24 +1249,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weight: 1
   isActiveOnStart: 1
-  pitchBottom: -45
+  pitchBottom: -50
   rollBottom: 0
   fovBottom: 60
   pitchMiddle: 0
   rollMiddle: 0
   fovMiddle: 60
-  pitchTop: 45
+  pitchTop: 50
   rollTop: 0
   fovTop: 60
   yaw: 0
   yawSpeed: 100
   target: {fileID: 684722192}
   curve:
-    A: {x: 0, y: 1, z: -2}
-    B: {x: 0, y: 3, z: -4}
-    C: {x: 0, y: 5, z: -4}
-    D: {x: 0, y: 6, z: -2}
-  curvePosition: {x: 4, y: 4, z: -4}
+    A: {x: 0, y: -1.09, z: -2.85}
+    B: {x: 0, y: -0.03, z: -6.85}
+    C: {x: 0, y: 3.34, z: -6.44}
+    D: {x: 0, y: 4.69, z: -2.23}
+  t: 0.51
   curveSpeed: 2
 --- !u!4 &2118486425
 Transform:
@@ -1273,7 +1276,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2118486423}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -0.06537092, y: 3.012298, z: -6.0083776}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}

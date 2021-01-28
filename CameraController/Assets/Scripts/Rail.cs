@@ -12,10 +12,7 @@ public class Rail : MonoBehaviour
 
     void Awake()
     {
-        for (int i = 0; i < gameObject.transform.childCount; i++)
-        {
-            pointList.Add(gameObject.transform.GetChild(i).transform);
-        }
+        GetPoints();
     }
 
     private void Update()
@@ -31,6 +28,12 @@ public class Rail : MonoBehaviour
     {
         Gizmos.color = Color.red;
 
+        GetPoints();
+        length = 0;
+        for (int i = 0; i < pointList.Count - 1; i++)
+        {
+            length += Vector3.Magnitude(pointList[i].position - pointList[i + 1].position);
+        }
         for (int i = 0; i < pointList.Count - 1; i++)
         {
             Gizmos.DrawLine(pointList[i].position, pointList[i+1].position);
@@ -60,6 +63,15 @@ public class Rail : MonoBehaviour
             test += Vector3.Magnitude(pointList[i].position - pointList[i + 1].position);
         }
         return test;
+    }
+
+    private void GetPoints()
+    {
+        pointList.Clear();
+        for (int i = 0; i < gameObject.transform.childCount; i++)
+        {
+            pointList.Add(gameObject.transform.GetChild(i).transform);
+        }
     }
 
     public Vector3 GetPosition(float distance)

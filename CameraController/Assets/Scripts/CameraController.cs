@@ -34,7 +34,8 @@ public class CameraController : MonoBehaviour
 
     void Update()
     {
-        float totalYaw = 0;
+        //float totalYaw = 0;
+        Vector2 totalYaw = new Vector2();
         float totalPitch = 0;
         float totalRoll = 0;
         float totalFov = 0;
@@ -46,7 +47,9 @@ public class CameraController : MonoBehaviour
         {
             CameraConfiguration cameraConfiguration = view.GetConfiguration();
 
-            totalYaw += view.weight * cameraConfiguration.yaw;
+            //totalYaw += view.weight * cameraConfiguration.yaw;
+            totalYaw += new Vector2(Mathf.Cos(cameraConfiguration.yaw * Mathf.Deg2Rad), Mathf.Sin(cameraConfiguration.yaw * Mathf.Deg2Rad)) * view.weight;
+
             totalPitch += view.weight * cameraConfiguration.pitch;
             totalRoll += view.weight * cameraConfiguration.roll;
             totalFov += view.weight * cameraConfiguration.fov;
@@ -57,7 +60,8 @@ public class CameraController : MonoBehaviour
 
         CameraConfiguration newCameraConfiguration = new CameraConfiguration
         {
-            yaw = totalYaw / totalWeight,
+            //yaw = totalYaw / totalWeight,
+            yaw = Vector2.SignedAngle(Vector2.right, totalYaw),
             pitch = totalPitch / totalWeight,
             roll = totalRoll / totalWeight,
             fov = totalFov / totalWeight,

@@ -18,7 +18,18 @@ public class FixedFollowView : AView
     private float yaw;
     private float pitch;
 
+    private void OnDrawGizmos()
+    {
+        FollowTarget();
+        GetConfiguration().DrawGizmos(Color.green);
+    }
+
     private void Update()
+    {
+        FollowTarget();
+    }
+
+    private void FollowTarget()
     {
         Vector3 dir = (target.transform.position - transform.position).normalized;
         Vector3 dirCentralPoint = (centralPoint.transform.position - transform.position).normalized;
@@ -51,7 +62,7 @@ public class FixedFollowView : AView
 
         if (Mathf.Abs(pitchDiff) < pitchOffsetMax)
             pitch = newPitch;
-        else if (pitchDiff <= - pitchOffsetMax)
+        else if (pitchDiff <= -pitchOffsetMax)
             pitch = pitchCentralPoint - pitchOffsetMax;
         else if (pitchDiff >= pitchOffsetMax)
             pitch = pitchCentralPoint + pitchOffsetMax;

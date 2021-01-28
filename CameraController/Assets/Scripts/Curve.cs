@@ -24,10 +24,10 @@ public class Curve
     {
         Gizmos.color = c;
 
-        Gizmos.DrawSphere(localToWorldMatrix.MultiplyPoint(A), 0.5f);
-        Gizmos.DrawSphere(localToWorldMatrix.MultiplyPoint(B), 0.5f);
-        Gizmos.DrawSphere(localToWorldMatrix.MultiplyPoint(C), 0.5f);
-        Gizmos.DrawSphere(localToWorldMatrix.MultiplyPoint(D), 0.5f);
+        Gizmos.DrawSphere(localToWorldMatrix.MultiplyPoint(A), 0.2f);
+        Gizmos.DrawSphere(localToWorldMatrix.MultiplyPoint(B), 0.2f);
+        Gizmos.DrawSphere(localToWorldMatrix.MultiplyPoint(C), 0.2f);
+        Gizmos.DrawSphere(localToWorldMatrix.MultiplyPoint(D), 0.2f);
 
         for (int i = 0; i < 50; i++)
         {
