@@ -4,23 +4,17 @@ using UnityEngine;
 
 public class TriggeredViewVolume : AViewVolume
 {
-    private bool isTriggered;
-
-    void Update()
-    {
-        if (isTriggered && !IsActive)
-            SetActive(true);
-        if (!isTriggered && IsActive)
-            SetActive(false);
-    }
+    public GameObject target;
 
     private void OnTriggerEnter(Collider other)
     {
-        isTriggered = true;
+        if (other.gameObject == target)
+            SetActive(true);
     }
 
     private void OnTriggerExit(Collider other)
     {
-        isTriggered = false;
+        if (other.gameObject == target)
+            SetActive(false);
     }
 }

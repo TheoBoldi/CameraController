@@ -9,6 +9,8 @@ public abstract class AView : MonoBehaviour
     public float weight = 1;
     //public bool isActiveOnStart;
 
+    protected bool IsActive;
+
     private void Start()
     {
         /*if (isActiveOnStart)
@@ -25,6 +27,7 @@ public abstract class AView : MonoBehaviour
             CameraController.Instance.AddView(this);
         else
             CameraController.Instance.RemoveView(this);
+        IsActive = isActive;
     }
 
     private void OnDrawGizmos()

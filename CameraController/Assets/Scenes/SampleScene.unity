@@ -231,9 +231,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd4a38fa67cb80741947d517f05ff890, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  priority: 1
-  view: {fileID: 2118486424}
+  priority: 2
+  view: {fileID: 1951602849}
   isCutOnSwitch: 0
+  target: {fileID: 1953168234}
 --- !u!1 &168409868
 GameObject:
   m_ObjectHideFlags: 0

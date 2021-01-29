@@ -129,7 +129,11 @@ public class DollyView : AView
 
     private void SetViewPosition()
     {
-        float move = Input.GetAxis("Horizontal");
+        float move = 0f;
+        
+        if (IsActive)
+            move = Input.GetAxis("Horizontal");
+
         railPosition += move * speed * Time.deltaTime;
 
         while (railPosition < 0 || railPosition > rail.GetLength())

@@ -14,7 +14,6 @@ public abstract class AViewVolume : MonoBehaviour
     public virtual float ComputeSelfWeight()
     {
         return 1f;
-        //return (priority * view.weight);
     }
 
     protected void SetActive(bool isActive)

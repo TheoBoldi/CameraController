@@ -39,11 +39,20 @@ public class ViewVolumeBlender : MonoBehaviour
                 highestPriority = activeViewVolumes[i].priority;
         }
 
+        float weightSum = 0;
+
         for (int i = 0; i < activeViewVolumes.Count; i++)
         {
             if (activeViewVolumes[i].priority < highestPriority)
                 continue;
-            activeViewVolumes[i].view.weight = 1f;
+            weightSum += activeViewVolumes[i].ComputeSelfWeight();
+        }
+
+        for (int i = 0; i < activeViewVolumes.Count; i++)
+        {
+            if (activeViewVolumes[i].priority < highestPriority)
+                continue;
+            activeViewVolumes[i].view.weight = activeViewVolumes[i].ComputeSelfWeight() / weightSum;
         }
     }
 

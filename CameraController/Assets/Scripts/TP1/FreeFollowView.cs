@@ -62,11 +62,19 @@ public class FreeFollowView : AView
 
     private void Update()
     {
-        float horizontal = Input.GetAxis("Horizontal");
-        yaw -= horizontal * yawSpeed * Time.deltaTime;
+        float horizontal = 0f;
+        float vertical = 0f;
 
-        float vertical = Input.GetAxis("Vertical");
-        t += vertical * curveSpeed * Time.deltaTime;
+        if (IsActive)
+        {
+            /*horizontal = Input.GetAxis("Horizontal");
+            vertical = Input.GetAxis("Vertical");*/
+            horizontal = Input.GetAxis("Mouse X");
+            vertical = Input.GetAxis("Mouse Y");
+        }
+        
+        yaw += horizontal * yawSpeed * Time.deltaTime;
+        t -= vertical * curveSpeed * Time.deltaTime;
 
         SetView();
     }
