@@ -10,6 +10,11 @@ public class SphereViewVolume : AViewVolume
 
     private float distance;
 
+    private void Start()
+    {
+        view.weight = 0;
+    }
+
     public void OnDrawGizmos()
     {
         Gizmos.DrawWireSphere(this.transform.position, innerRadius);
@@ -29,29 +34,23 @@ public class SphereViewVolume : AViewVolume
         {
             SetActive(false);
         }
-
-        ComputeSelfWeight();
     }
 
     public override float ComputeSelfWeight()
     {
         if (distance > outerRadius)
         {
-            view.weight = 0;
+            return 0f;
         }
 
-        else if(distance <= outerRadius && distance > innerRadius)
+        else if (distance <= outerRadius && distance > innerRadius)
         {
-            view.weight = (distance - innerRadius) / (outerRadius - innerRadius);
+            return 1 - ((distance - innerRadius) / (outerRadius - innerRadius));
         }
 
-        else if (distance < innerRadius)
+        else
         {
-            view.weight = 1f;
+            return 1f;
         }
-
-        Debug.Log(view.weight);
-
-        return base.ComputeSelfWeight();
     }
 }

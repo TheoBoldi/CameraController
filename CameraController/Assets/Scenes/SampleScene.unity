@@ -152,12 +152,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6f2c17a0eab2764eb7f598acf05a1d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  priority: 0
-  view: {fileID: 281156188}
+  priority: 1
+  view: {fileID: 1951602849}
   isCutOnSwitch: 0
   target: {fileID: 1953168234}
-  outerRadius: 5
-  innerRadius: 10
+  outerRadius: 10
+  innerRadius: 5
 --- !u!4 &20146655
 Transform:
   m_ObjectHideFlags: 0

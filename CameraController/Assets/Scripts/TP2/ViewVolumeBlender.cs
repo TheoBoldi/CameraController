@@ -28,31 +28,31 @@ public class ViewVolumeBlender : MonoBehaviour
         DontDestroyOnLoad(this.gameObject);
     }
 
+    private void Update()
+    {
+        //CheckPriorities();
+    }
+
     public void CheckPriorities()
     {
         int highestPriority = -1;
 
         for (int i = 0; i < activeViewVolumes.Count; i++)
         {
-            activeViewVolumes[i].view.weight = 0;
             if (activeViewVolumes[i].priority > highestPriority)
                 highestPriority = activeViewVolumes[i].priority;
         }
 
-        float weightSum = 0;
-
         for (int i = 0; i < activeViewVolumes.Count; i++)
         {
             if (activeViewVolumes[i].priority < highestPriority)
-                continue;
-            weightSum += activeViewVolumes[i].ComputeSelfWeight();
-        }
-
-        for (int i = 0; i < activeViewVolumes.Count; i++)
-        {
-            if (activeViewVolumes[i].priority < highestPriority)
-                continue;
-            activeViewVolumes[i].view.weight = activeViewVolumes[i].ComputeSelfWeight() / weightSum;
+            {
+                activeViewVolumes[i].view.weight = 0;
+            }
+            else
+            {
+                activeViewVolumes[i].view.weight = activeViewVolumes[i].ComputeSelfWeight();
+            }
         }
     }
 
@@ -64,7 +64,6 @@ public class ViewVolumeBlender : MonoBehaviour
             List<AViewVolume> list = new List<AViewVolume>();
             list.Add(aViewVolume);
             volumesPerViews.Add(aViewVolume.view, list);
-
             aViewVolume.view.SetActive(true);
         }
         else
