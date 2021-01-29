@@ -30,7 +30,7 @@ public class SphereViewVolume : AViewVolume
             SetActive(true);
         }
 
-        else if(distance > outerRadius && IsActive)
+        else if (distance > outerRadius && IsActive)
         {
             SetActive(false);
         }

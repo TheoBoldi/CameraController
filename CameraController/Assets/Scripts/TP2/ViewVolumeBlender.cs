@@ -30,7 +30,7 @@ public class ViewVolumeBlender : MonoBehaviour
 
     private void Update()
     {
-        //CheckPriorities();
+        CheckPriorities();
     }
 
     public void CheckPriorities()
@@ -47,7 +47,7 @@ public class ViewVolumeBlender : MonoBehaviour
         {
             if (activeViewVolumes[i].priority < highestPriority)
             {
-                activeViewVolumes[i].view.weight = 0;
+                activeViewVolumes[i].view.weight = 0f;
             }
             else
             {

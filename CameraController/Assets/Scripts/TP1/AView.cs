@@ -7,17 +7,8 @@ public abstract class AView : MonoBehaviour
 {
     [Range(0, 100)]
     public float weight = 1;
-    //public bool isActiveOnStart;
 
     protected bool IsActive;
-
-    private void Start()
-    {
-        /*if (isActiveOnStart)
-        {
-            SetActive(true);
-        }*/
-    }
 
     public abstract CameraConfiguration GetConfiguration();
 
