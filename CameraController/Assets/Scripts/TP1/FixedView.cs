@@ -17,9 +17,9 @@ public class FixedView : AView
     {
         CameraConfiguration cameraConfiguration = new CameraConfiguration
         {
-            yaw = yaw,
-            pitch = pitch,
-            roll = roll,
+            yaw = yaw + transform.rotation.eulerAngles.y,
+            pitch = pitch + transform.rotation.eulerAngles.x,
+            roll = roll + transform.rotation.eulerAngles.z,
             fov = fov,
             pivot = transform.position,
             distance = 0
